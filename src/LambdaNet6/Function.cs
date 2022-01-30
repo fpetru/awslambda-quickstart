@@ -30,13 +30,11 @@ namespace LambdaNet6
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static string FunctionHandler(object input, ILambdaContext context)
+        public static string FunctionHandler(string input, ILambdaContext context)
         {
-            // {input?.ToUpper()}
-
             var architecture = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture;
             var dotnetVersion = Environment.Version.ToString();
-            return $"Architecture: {architecture}, .NET Version: {dotnetVersion} -- ";
+            return $"Architecture: {architecture}, .NET Version: {dotnetVersion} -- {input?.ToUpper()}";
         }
     }
 }

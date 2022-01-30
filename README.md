@@ -54,13 +54,14 @@ or later is required to deploy this project.
         dotnet tool update -g Amazon.Lambda.Tools
     ```
 
-- Execute unit tests
+- Create the project naming it `LambdaNet6`
     ```
-        cd "LambdaNet6/test/LambdaNet6.Tests"
-        dotnet test
+        dotnet new lambda.CustomRuntimeFunction --name LambdaNet6
     ```
 
-- Deploy function to AWS Lambda
+## Manage the created project
+
+1. Deploy function to AWS Lambda
     
     It deploys the .NET Core Lambda project directly to the AWS Lambda service. The function is created if this is the first deployment. If the Lambda function already exists then the function code is updated. If any of the function configuration properties specified on the command line are different, the existing function configuration is updated.
 
@@ -94,13 +95,42 @@ or later is required to deploy this project.
         ... zipping: bootstrap.deps.json
     ```
 
-- Invoke Function
+2. Invoke Function
     It invokes the Lambda function in AWS Lambda passing in the value of --payload as the input parameter to the Lambda function.
 
     ```
-        dotnet lambda invoke-function MyFunction --payload "The Function Payload"
+        dotnet lambda invoke-function LambdaNet6 --payload "hello lamBDA"
     ```
-    
+
+    The string is not correctly updated, being now uppercase.
+
+    ```
+        Amazon Lambda Tools for .NET Core applications (5.2.0)
+        Project Home: https://github.com/aws/aws-extensions-for-dotnet-cli, https://github.com/aws/aws-lambda-dotnet
+
+        Payload:
+        "Architecture: X64, .NET Version: 6.0.0 -- HELLO LAMBDA"
+
+        Log Tail:
+        START RequestId: 6cbe418a-cbed-4e57-86c6-1bb4c853181b Version: $LATEST
+        END RequestId: 6cbe418a-cbed-4e57-86c6-1bb4c853181b
+        REPORT RequestId: 6cbe418a-cbed-4e57-86c6-1bb4c853181b  Duration: 2.14 ms       Billed Duration: 3 ms   Memory Size: 256 MB     Max Memory Used: 68 MB
+    ```    
+
+3. Execute unit tests
+    ```
+        cd "LambdaNet6/test/LambdaNet6.Tests"
+        dotnet test
+    ```
+
+    The output will be:
+    ```
+        Starting test execution, please wait...
+        A total of 1 test files matched the specified pattern.
+
+        Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - LambdaNet6.Tests.dll (net6.0)
+    ```
+
 ## Arm64
 
 If you want to run your Lambda on an Arm64 processor, all you need is to do is add `"function-architecture": "arm64"` to the `aws-lambda-tools-defaults.json` file. Then deploy as described above.

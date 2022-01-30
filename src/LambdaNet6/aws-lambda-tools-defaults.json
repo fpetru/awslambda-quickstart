@@ -9,7 +9,7 @@
   "region": "eu-central-1",
   "configuration": "Debug",
   "function-runtime": "provided.al2",
-  "function-memory-size": 256,
+  "function-memory-size": 128,
   "function-timeout": 30,
   "function-handler": "bootstrap",
   "msbuild-parameters": "--self-contained true"

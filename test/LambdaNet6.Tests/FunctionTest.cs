@@ -1,13 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 using Xunit;
-using Amazon.Lambda.Core;
 using Amazon.Lambda.TestUtilities;
-
-using LambdaNet6;
 
 namespace LambdaNet6.Tests
 {
@@ -21,7 +13,7 @@ namespace LambdaNet6.Tests
             var context = new TestLambdaContext();
             var upperCase = Function.FunctionHandler("hello world", context);
 
-            Assert.Equal("HELLO WORLD", upperCase);
+            Assert.Equal("Architecture: X64, .NET Version: 6.0.0 -- HELLO WORLD", upperCase);
         }
     }
 }
