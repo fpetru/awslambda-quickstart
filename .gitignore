@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs
+/src/LambdaNet6/obj
+/src/LambdaNet6/bin
+/src/LambdaNet6/.vs
+/test/LambdaNet6.Tests/bin
+/test/LambdaNet6.Tests/obj
