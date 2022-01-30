@@ -1,5 +1,30 @@
 # AWS Lambda Custom Runtime Function Project
 
+## Prerequistes
+
+- AWS Account – You need to have a valid AWS account to get started with it. Navigate to https://console.aws.amazon.com/ to get started with Amazon Web Services
+- Visual Studio Code – Download and install Visual Studio Code in your machine. VS Code is available for Windows, Linux, and Mac
+- Code Development SDK – You need to install the relevant SDK that you are going to use to code your application. This can be either .NET SDK, Node JS SDK or the Python SDK
+- AWS SAM CLI – This is a command line utility from Amazon that enables us to develop and test our serverless applications locally. Although it is not mandatory for the toolkit, but still it is recommended to install it on the local machine
+
+## AWS Extensions for .NET CLI
+
+This sample project has been built with this tool: <https://github.com/aws/aws-extensions-for-dotnet-cli>
+
+To install these tools use the dotnet tool install command.
+
+```
+    dotnet tool install -g Amazon.Lambda.Tools
+```
+
+To update to the latest version of one of these tools use the dotnet tool update command.
+
+```
+    dotnet tool update -g Amazon.Lambda.Tools
+```
+
+## Project structure
+
 The `source` code of this starter project consists of:
 * `Function.cs` - contains a class with a Main method that starts the bootstrap, and a single function handler method
 * `aws-lambda-tools-defaults.json` - default argument settings for use with Visual Studio and command line deployment tools for AWS
@@ -36,13 +61,17 @@ or later is required to deploy this project.
     ```
 
 - Deploy function to AWS Lambda
+    
+    It deploys the .NET Core Lambda project directly to the AWS Lambda service. The function is created if this is the first deployment. If the Lambda function already exists then the function code is updated. If any of the function configuration properties specified on the command line are different, the existing function configuration is updated.
+
     ```
         cd "LambdaNet6/src/LambdaNet6"
         dotnet lambda deploy-function LambdaNet6
     ```
 
-    The output details  will be very similar to:
+    _Note:_ To avoid accidental function configuration changes during a redeployment, only default values explicitly set on the command line are used. The defaults file is not used.
 
+    The output details will be very similar to:
     ```
         Project Home: https://github.com/aws/aws-extensions-for-dotnet-cli, https://github.com/aws/aws-lambda-dotnet
 
@@ -65,6 +94,13 @@ or later is required to deploy this project.
         ... zipping: bootstrap.deps.json
     ```
 
+- Invoke Function
+    It invokes the Lambda function in AWS Lambda passing in the value of --payload as the input parameter to the Lambda function.
+
+    ```
+        dotnet lambda invoke-function MyFunction --payload "The Function Payload"
+    ```
+    
 ## Arm64
 
 If you want to run your Lambda on an Arm64 processor, all you need is to do is add `"function-architecture": "arm64"` to the `aws-lambda-tools-defaults.json` file. Then deploy as described above.

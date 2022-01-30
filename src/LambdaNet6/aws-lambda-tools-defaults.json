@@ -6,8 +6,8 @@
     "All the command line options for the Lambda command can be specified in this file."
   ],
   "profile": "",
-  "region": "",
-  "configuration": "Release",
+  "region": "eu-central-1",
+  "configuration": "Debug",
   "function-runtime": "provided.al2",
   "function-memory-size": 256,
   "function-timeout": 30,
